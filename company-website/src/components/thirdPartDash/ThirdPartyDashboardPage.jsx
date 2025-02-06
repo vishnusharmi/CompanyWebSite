@@ -1,18 +1,18 @@
-import Footer from "../../components/adminLayout/Footer";
-import Header from "../../components/adminLayout/Header";
-import SideBar from "../../components/adminLayout/SiderBar";
+import ThirdPartyFooter from "./layout/ThirdPartyFooter";
+import ThirdPartyHeader from "./layout/ThirdPartyHeader";
+import ThirdPartySiderBar from "./layout/ThirdPartySiderBar";
 import { Outlet } from "react-router-dom";
 
-const AdminDashboardPage = () => {
+const ThirdPartyDashboardPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
-      <Header />
+      <ThirdPartyHeader />
 
       {/* Main Content Area */}
       <div className="flex flex-1">
         {/* SideBar */}
-        <SideBar />
+        <ThirdPartySiderBar />
 
         {/* Main Content */}
         <div className="flex-1">
@@ -21,9 +21,9 @@ const AdminDashboardPage = () => {
       </div>
 
       {/* Footer */}
-      <Footer />
+      <ThirdPartyFooter />
     </div>
   );
 };
 
-export default AdminDashboardPage;
+export default ThirdPartyDashboardPage;

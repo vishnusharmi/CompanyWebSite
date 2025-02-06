@@ -1,18 +1,18 @@
-import UserFooter from "../../components/UserLayout/UserFooter";
-import UserHeader from "../../components/UserLayout/UserHeader";
-import UserSideBar from "../../components/UserLayout/UserSiderBar";
+import Footer from "./layout/Footer";
+import Header from "./layout/Header";
+import SideBar from "./layout/SiderBar";
 import { Outlet } from "react-router-dom";
 
-const UserDashboardPage = () => {
+const AdminDashboardPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
-      <UserHeader />
+      <Header />
 
       {/* Main Content Area */}
       <div className="flex flex-1">
         {/* SideBar */}
-        <UserSideBar />
+        <SideBar />
 
         {/* Main Content */}
         <div className="flex-1">
@@ -21,9 +21,9 @@ const UserDashboardPage = () => {
       </div>
 
       {/* Footer */}
-      <UserFooter />
+      <Footer />
     </div>
   );
 };
 
-export default UserDashboardPage;
+export default AdminDashboardPage;

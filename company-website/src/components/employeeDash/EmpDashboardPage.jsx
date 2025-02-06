@@ -1,18 +1,18 @@
-import PartnerFooter from "../components/thirdPartDash/PartnerFooter";
-import PartnerHeader from "../components/thirdPartDash/PartnerHeader";
-import PartnerSideBar from "../components/thirdPartDash/PartnerSiderBar";
+import EmployeeFooter from "./layout/EmployeeFooter";
+import EmployeeHeader from "./layout/EmployeeHeader";
+import EmployeeSideBar from "./layout/EmployeeSideBar";
 import { Outlet } from "react-router-dom";
 
-const ThirdPartyDashboardPage = () => {
+const EmpDashboardPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
-      <PartnerHeader />
+      <EmployeeHeader />
 
       {/* Main Content Area */}
       <div className="flex flex-1">
         {/* SideBar */}
-        <PartnerSideBar />
+        <EmployeeSideBar />
 
         {/* Main Content */}
         <div className="flex-1">
@@ -21,9 +21,9 @@ const ThirdPartyDashboardPage = () => {
       </div>
 
       {/* Footer */}
-      <PartnerFooter />
+      <EmployeeFooter />
     </div>
   );
 };
 
-export default ThirdPartyDashboardPage;
+export default EmpDashboardPage;
