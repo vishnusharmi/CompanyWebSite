@@ -19,11 +19,12 @@ const SideBar = () => {
   return (
     <>
       {/* Sidebar for larger screens */}
-      <nav className="bg-gray-700 text-white w-54 flex-shrink-0 hidden md:block">
+{/* Sidebar for larger screens */}
+<nav className="bg-gray-700 text-white  w-54 fixed left-0 top-0 h-screen flex-shrink-0 hidden md:block mt-9">
         <div className="p-4">
           <Link
             to={"/admin"}
-            className="flex items-center py-2 hover:bg-gray-600 rounded transition-colors duration-300"
+            classNme="flex items-center  py-2 hover:bg-gray-600 rounded transition-colors duration-300"
           >
             Dashboard
           </Link>

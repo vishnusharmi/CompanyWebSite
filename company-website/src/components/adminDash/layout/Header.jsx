@@ -2,8 +2,8 @@ import { FaBell, FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center w-full shadow-md">
-      {/* Title */}
+<header className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center w-full shadow-md fixed top-0 left-0 z-50">
+{/* Title */}
       <div className="text-xl font-semibold">Busitron</div>
 
       {/* Right Side: Notification and User Profile */}

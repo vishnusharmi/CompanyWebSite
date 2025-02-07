@@ -21,7 +21,7 @@ const AdminDashboardPage = () => {
       </div>
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
