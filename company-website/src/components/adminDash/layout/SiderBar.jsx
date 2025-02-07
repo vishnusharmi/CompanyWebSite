@@ -57,6 +57,7 @@ const SideBar = () => {
       <nav className="bg-gray-900 text-white w-60 flex-shrink-0 fixed left-0 top-10 bottom-0 z-50 flex flex-col">
         {/* Sidebar Header */}
 
+
         {/* Sidebar Menu Items */}
         <div className="p-2 flex-grow space-y-2 overflow-y-auto">
           {menuItems.map((item) => (
