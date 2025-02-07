@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../loginRegister/Login";
+import Forget from "../loginRegister/Forget";
+import ResetPassword from "../loginRegister/Reset-password";
 // admin imports
 import AdminDashboard from "../adminDash/AdminDashboardPage";
 import MainDashboard from "../adminDash/layout/MainDashboard";
@@ -31,6 +33,8 @@ function Routing() {
         <Routes>
           <Route index element={<Login />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forget-password" element={<Forget />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Nested Route for Admin Dashboard */}
           <Route path="/admin" element={<AdminDashboard />}>
