@@ -22,7 +22,9 @@ import TaskOverview from "../thirdPartDash/pages/taskOverview/TaskOverview";
 import EmployeeDashboard from "../employeeDash/layout/EmployeeDashboard";
 import EmployeeDashboardPage from "../employeeDash/EmpDashboardPage";
 import PerformanceTracking from "../employeeDash/pages/performanceTracking/PerformanceTracking";
-import EmploteeTask from "../employeeDash/pages/taskManagement/TaskManagement"
+import EmployeeTask from "../employeeDash/pages/taskManagement/TaskManagement"
+
+
 
 function Routing() {
   return (
@@ -49,13 +51,13 @@ function Routing() {
             <Route path="/company/overview" element={<TaskOverview />} />
             <Route path="/company/earnings" element={<EarningsManagement />} />
             <Route path="/company/metrics" element={<PerformanceMetrics />} />
-            <Route path="/company/communcation" element={<Communication />} />
+            <Route path="/company/communication" element={<Communication />} />
           </Route>
 
           {/* Nested Route for Partner Dashboard */}
           <Route path="/employee" element={<EmployeeDashboardPage />}>
             <Route index element={<EmployeeDashboard />} />
-            <Route path="/employee/task" element={<EmploteeTask />} />
+            <Route path="/employee/task" element={<EmployeeTask />} />
             <Route
               path="/employee/performance"
               element={<PerformanceTracking />}
