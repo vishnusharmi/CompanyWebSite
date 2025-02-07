@@ -15,7 +15,7 @@ const AdminDashboardPage = () => {
         <SideBar />
 
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 mt-10">
           <Outlet /> {/* This will render nested routes */}
         </div>
       </div>
