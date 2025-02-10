@@ -91,7 +91,7 @@ const UserManagement = () => {
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
-              className="h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm placeholder:text-gray-400 mt-1 focus:outline-none"
+              className="h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm placeholder:text-gray-400 mt-1 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               required
             />
           </div>
@@ -103,7 +103,7 @@ const UserManagement = () => {
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
-              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm placeholder:text-gray-400 mt-1 focus:outline-none"
+              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm placeholder:text-gray-400 mt-1 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               required
             />
           </div>
@@ -116,7 +116,7 @@ const UserManagement = () => {
             <select
               value={formData.status}
               onChange={(e) => setFormData({...formData, status: e.target.value})}
-              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none"
+              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             >
             <option value="" disabled>Select a Status</option>
               <option value="Active">Active</option>
@@ -132,7 +132,7 @@ const UserManagement = () => {
             <select
               value={formData.role}
               onChange={(e) => setFormData({...formData, role: e.target.value})}
-              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none"
+              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             >
                 <option value="" disabled>Select a role</option>
               {roles.map(role => (
@@ -149,7 +149,7 @@ const UserManagement = () => {
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none"
+            className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
@@ -161,7 +161,7 @@ const UserManagement = () => {
               type="text"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none"
+              className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               required
             />
             <button
@@ -217,7 +217,7 @@ const UserManagement = () => {
             <input
               type="text"
               placeholder="Search users..."
-              className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-200 focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
