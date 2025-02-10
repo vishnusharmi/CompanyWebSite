@@ -10,7 +10,7 @@ import {
   Printer,
   Search
 } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
 import { X, Save, Upload } from 'lucide-react';
@@ -43,11 +43,11 @@ const FinancialManagement = () => {
   const [filterType, setFilterType] = useState('all');
 
   // Sample data for the earnings chart
-  const chartData = [
-    { name: 'Jan', employees: 45000, contractors: 65000 },
-    { name: 'Feb', employees: 48000, contractors: 68000 },
-    { name: 'Mar', employees: 52000, contractors: 72000 },
-  ];
+  // const chartData = [
+  //   { name: 'Jan', employees: 45000, contractors: 65000 },
+  //   { name: 'Feb', employees: 48000, contractors: 68000 },
+  //   { name: 'Mar', employees: 52000, contractors: 72000 },
+  // ];
 
   const generateInvoice = (id) => {
     console.log('Generating invoice for ID:', id);
@@ -95,7 +95,7 @@ const [formData, setFormData] = useState({
 
   return (
     
-    <div className={`p-6 max-w-7xl mx-auto ` }>
+    <div className={`p-6 max-w-7xl min-h-screen mx-auto ` }>
       {/* Header Section */}
       <div className="mb-8">
         <div className={`flex justify-between items-center mb-6 `}>
