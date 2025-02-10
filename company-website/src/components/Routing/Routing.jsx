@@ -23,6 +23,7 @@ import EmployeeDashboard from "../employeeDash/layout/EmployeeDashboard";
 import EmployeeDashboardPage from "../employeeDash/EmpDashboardPage";
 import PerformanceTracking from "../employeeDash/pages/performanceTracking/PerformanceTracking";
 import EmployeeTask from "../employeeDash/pages/taskManagement/TaskManagement"
+import NotificationSystem from "../adminDash/pages/notifications/Notification";
 
 
 
@@ -36,6 +37,7 @@ function Routing() {
           <Route path="/forget-password" element={<Forget />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
+
           {/* Nested Route for Admin Dashboard */}
           <Route path="/admin" element={<AdminDashboard />}>
             <Route index element={<MainDashboard />} />
@@ -43,6 +45,7 @@ function Routing() {
             <Route path="/admin/financial" element={<FinancialManagement />} />
             <Route path="/admin/task" element={<TaskManagement />} />
             <Route path="/admin/content" element={<ContentManagement />} />
+            <Route path="/admin/notification" element={<NotificationSystem />}></Route>
           </Route>
 
           {/* Nested Route for Partner Dashboard */}

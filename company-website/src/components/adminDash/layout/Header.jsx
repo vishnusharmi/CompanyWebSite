@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FaBell } from "react-icons/fa";
 import Profile from "../../utils/Profile";
@@ -34,12 +35,14 @@ const Header = () => {
       {/* Right Side: Notification and User Profile */}
       <div className="flex items-center space-x-6">
         {/* Notification Icon */}
-        <button className="relative" onClick={handleBellClick}>
-          <FaBell className="text-2xl hover:text-gray-300 transition-colors duration-300" />
-          <span className="absolute bottom-3 left-3 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+          <Link to={'/admin/notification'}>
+          <button className="relative">
+          <FaBell className="text-lg hover:text-gray-300 transition-colors duration-300" />
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
             3
           </span>
         </button>
+          </Link>
 
         {/* User Profile Button */}
         <button
