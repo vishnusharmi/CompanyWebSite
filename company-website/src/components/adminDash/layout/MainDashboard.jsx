@@ -1,17 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import sample_image from "../../../../public/sample_image.jpg";
+import sample_image from "/sample_image.jpg";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
   PieChart,
   Pie,
   Cell,
-} from "recharts";
+} from "recharts";  
 
 export default function Dashboard() {
   const barData = [
@@ -30,8 +29,9 @@ export default function Dashboard() {
     { name: "Projects Cancel", value: 1000, color: "#F87171" },
   ];
   return (
-    <div >
-      <div>
+  
+      <>
+      <div >
       <div className="p-6 bg-gray-800  ">
         {/* Welcome Section */}
         <div className=" rounded-2xl shadow-md p-4 flex items-center mt-5  bg-gray-50">
@@ -196,7 +196,8 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-    </div>
-    </div>
+        </div>
+    </>
+    
   );
 }
