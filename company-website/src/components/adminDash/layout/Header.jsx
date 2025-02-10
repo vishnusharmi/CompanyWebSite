@@ -5,6 +5,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
+
     <header className="bg-gray-700 text-white py-3 px-4 flex justify-between items-center fixed top-0 left-0 w-full shadow-md z-500 md:pl-20">
       {/* Left Side: Title & Mobile Menu Icon */}
       <div className="flex items-center space-x-2">
@@ -19,7 +20,7 @@ const Header = () => {
 
         {/* Brand Name (Hidden on Mobile) */}
         <span className="text-lg font-bold md:block hidden">Busitron</span>
-      </div>
+    
 
       {/* Right Side: Notification & User Profile */}
       <div className="flex items-center space-x-4 md:space-x-6">
