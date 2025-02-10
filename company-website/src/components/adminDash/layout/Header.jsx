@@ -1,5 +1,6 @@
 import { FaBell, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,12 +26,14 @@ const Header = () => {
       {/* Right Side: Notification & User Profile */}
       <div className="flex items-center space-x-4 md:space-x-6">
         {/* Notification Icon */}
-        <button className="relative">
+          <Link to={'/admin/notification'}>
+          <button className="relative">
           <FaBell className="text-lg hover:text-gray-300 transition-colors duration-300" />
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
             3
           </span>
         </button>
+          </Link>
 
         {/* User Profile (Hidden on Small Screens) */}
         <button className="hidden md:flex items-center space-x-2 hover:text-gray-300 transition-colors duration-300">
