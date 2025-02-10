@@ -20,7 +20,7 @@ const Header = () => {
 
         {/* Brand Name (Hidden on Mobile) */}
         <span className="text-lg font-bold md:block hidden">Busitron</span>
-    
+    </div>
 
       {/* Right Side: Notification & User Profile */}
       <div className="flex items-center space-x-4 md:space-x-6">
@@ -54,6 +54,7 @@ const Header = () => {
         </div>
       )}
     </header>
+
   );
 };
 

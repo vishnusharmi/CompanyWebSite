@@ -31,7 +31,7 @@ export default function Dashboard() {
   ];
   return (
     <div>
-      <div className="p-6 bg-gray-800 h-[calc(100vh)] overflow-y-auto ml-54 ">
+      <div className="p-6 bg-gray-800 h-[calc(100vh)] overflow-y-auto  ">
         {/* Welcome Section */}
         <div className=" rounded-2xl shadow-md p-6 flex items-center mt-20  bg-gray-50">
           <img
