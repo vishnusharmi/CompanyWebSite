@@ -167,7 +167,7 @@ const UserManagement = () => {
             <button
               type="button"
               onClick={generatePassword}
-              className="ml-2 px-3 py-2 bg-gray-200 rounded-md text-sm"
+              className="ml-2 px-3 py-2 bg-gray-200 rounded-md text-sm hover:bg-green-500 hover:text-white"
             >
               Generate
             </button>
