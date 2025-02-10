@@ -1,17 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import sample_image from "../../../../public/sample_image.jpg";
+import sample_image from "/sample_image.jpg";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
   PieChart,
   Pie,
   Cell,
-} from "recharts";
+} from "recharts";  
 
 export default function Dashboard() {
   const barData = [
@@ -33,7 +32,7 @@ export default function Dashboard() {
     <div>
       <div className="p-6 bg-gray-800 h-[calc(100vh)] overflow-y-auto  ">
         {/* Welcome Section */}
-        <div className=" rounded-2xl shadow-md p-6 flex items-center mt-20  bg-gray-50">
+        <div className=" rounded-2xl shadow-md p-6 flex items-center bg-gray-50">
           <img
             src={sample_image}
             alt="Businessman"

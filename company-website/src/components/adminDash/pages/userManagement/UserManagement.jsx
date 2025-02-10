@@ -205,7 +205,7 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto bg-white rounded-lg shadow">
+    <div className="w-full min-h-screen max-w-7xl mx-auto bg-white rounded-lg shadow">
       <div className="p-6">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
