@@ -1,60 +1,72 @@
-import { FaBell, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import React, { useState } from "react";
+import { FaBell } from "react-icons/fa";
+import Profile from "../../utils/Profile";
+import Notifications from "../../utils/Notifications";
+import logo from "../../../assets/BusitronLogo.jpg"; // Adjust the path to your local logo
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
 
+  const handleBellClick = () => {
+    setShowNotifications(!showNotifications);
+    setShowProfile(false);
+  };
+
+  const handleProfileClick = () => {
+    setShowProfile(!showProfile);
+    setShowNotifications(false);
+  };
+
+  // bg-gray-800
   return (
-
-    <header className="bg-gray-700 text-white py-3 px-4 flex justify-between items-center fixed top-0 left-0 w-full shadow-md z-500 md:pl-20">
-      {/* Left Side: Title & Mobile Menu Icon */}
+    <header className="bg-linear-to-r from-gray-600 to-gray-800 text-white py-2 px-8 border-b border-gray-700 flex justify-between items-center relative">
+      {/* Left Side: Branding */}
       <div className="flex items-center space-x-2">
-        {/* Mobile Menu Icon */}
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? (
-            <FaTimes className="text-xl hover:text-gray-300 transition-colors duration-300" />
-          ) : (
-            <FaBars className="text-xl hover:text-gray-300 transition-colors duration-300" />
-          )}
-        </button>
+        <img
+          src={logo}
+          alt="Logo"
+          className="w-8 h-8 rounded-3xl mr-5 border-2 border-white shadow-lg"
+        />
+        <span className="text-2xl font-bold">Busitron</span>
+      </div>
 
-        {/* Brand Name (Hidden on Mobile) */}
-        <span className="text-lg font-bold md:block hidden">Busitron</span>
-    </div>
-
-      {/* Right Side: Notification & User Profile */}
-      <div className="flex items-center space-x-4 md:space-x-6">
+      {/* Right Side: Notification and User Profile */}
+      <div className="flex items-center space-x-6">
         {/* Notification Icon */}
-        <button className="relative">
-          <FaBell className="text-lg hover:text-gray-300 transition-colors duration-300" />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+        <button className="relative" onClick={handleBellClick}>
+          <FaBell className="text-2xl hover:text-gray-300 transition-colors duration-300" />
+          <span className="absolute bottom-3 left-3 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
             3
           </span>
         </button>
 
-        {/* User Profile (Hidden on Small Screens) */}
-        <button className="hidden md:flex items-center space-x-2 hover:text-gray-300 transition-colors duration-300">
-          <FaUserCircle className="text-xl" />
-          <span className="text-sm">John Doe</span>
+        {/* User Profile Button */}
+        <button
+          className="flex items-center space-x-2 hover:text-gray-300 transition-colors duration-300 cursor-pointer"
+          onClick={handleProfileClick}
+        >
+          <img
+            src="https://dummyimage.com/40x40"
+            alt="John Doe"
+            className="w-10 h-10 rounded-full border-2 border-blue-500"
+          />
+          <span className="font-semibold">John Doe</span>
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown (Same Style as Sidebar) */}
-      {menuOpen && (
-        <div className="absolute top-14 left-0 w-64 bg-gray-700 text-white p-4 md:hidden shadow-md">
-          <button className="block w-full text-left py-2 hover:bg-gray-600 rounded transition">
-            Dashboard
-          </button>
-          <button className="block w-full text-left py-2 hover:bg-gray-600 rounded transition">
-            Profile
-          </button>
-          <button className="block w-full text-left py-2 hover:bg-red-600 rounded transition">
-            Logout
-          </button>
+      {/* Render Notifications and Profile as siblings so they don't affect layout */}
+      {showNotifications && (
+        <div className="absolute top-12 right-32 mt-2">
+          <Notifications onClose={() => setShowNotifications(false)} />
+        </div>
+      )}
+      {showProfile && (
+        <div className="absolute top-12 right-5 mt-2">
+          <Profile onClose={() => setShowProfile(false)} />
         </div>
       )}
     </header>
-
   );
 };
 

@@ -193,7 +193,7 @@ const TaskManagement = () => {
 
   return (
     // Main container with relative positioning so modals appear only in this area.
-    <div className="p-6 max-w-7xl h-full relative">
+    <div className="p-6 max-w-7xl min-h-screen relative">
       {/* --- New Task Modal --- */}
       {showAddTask && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/70 bg-opacity-50 z-50">

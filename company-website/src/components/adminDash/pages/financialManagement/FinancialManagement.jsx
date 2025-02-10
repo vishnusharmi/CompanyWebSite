@@ -32,7 +32,7 @@ function FinancialManagement() {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 min-h-screen ">
       <h2 className="text-xl font-bold">Financial Management</h2>
       
       {/* Earnings Section */}
