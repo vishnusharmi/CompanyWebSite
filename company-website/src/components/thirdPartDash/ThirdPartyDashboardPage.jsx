@@ -21,7 +21,7 @@ const ThirdPartyDashboardPage = () => {
       </div>
 
       {/* Footer */}
-      <ThirdPartyFooter />
+      {/* <ThirdPartyFooter /> */}
     </div>
   );
 };
