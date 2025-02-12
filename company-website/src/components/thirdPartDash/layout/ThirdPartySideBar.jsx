@@ -17,7 +17,7 @@ const ThirdPartySideBar = () => {
   return (
     <>
       {/* Sidebar for larger screens */}
-      <nav className="bg-gray-700 text-white w-54 flex-shrink-0 hidden md:block">
+      <nav className="bg-gray-700 text-white flex-shrink-0 hidden h-dvh md:block">
         <div className="p-4">
           <Link
             to={"/company"}

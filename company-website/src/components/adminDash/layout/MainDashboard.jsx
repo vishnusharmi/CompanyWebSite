@@ -10,7 +10,7 @@ import {
   PieChart,
   Pie,
   Cell,
-} from "recharts";  
+} from "recharts";
 
 export default function Dashboard() {
   const barData = [
@@ -29,104 +29,115 @@ export default function Dashboard() {
     { name: "Projects Cancel", value: 1000, color: "#F87171" },
   ];
   return (
-  
-      <>
-      <div >
-      <div className="p-6 bg-gray-800  ">
-        {/* Welcome Section */}
-        <div className=" rounded-2xl shadow-md p-4 flex items-center mt-5  bg-gray-50">
-          <img
-            src={sample_image}
-            alt="Businessman"
-            className="w-35 h-20 object-contain "
-          />
-          <div className="ml-6 ">
-            <h1 className="text-xl font-bold text-blue-700 "> <span className="text-xl text-black font-bold mr-2">Welcome </span> {" "} John Doe!</h1>
-            <p className="text-black mt-2 text-sm pr-20">
-              Busitron empowers businesses with smart solutions, streamlining
-              operations and driving success with innovation and efficiency.
-            </p>
+    <>
+      <div>
+        <div className="p-6 bg-gray-800  ">
+          {/* Welcome Section */}
+          <div className=" rounded-2xl shadow-md p-4 flex items-center mt-5  bg-gray-50">
+            <img
+              src={sample_image}
+              alt="Businessman"
+              className="w-35 h-20 object-contain "
+            />
+            <div className="ml-6 ">
+              <h1 className="text-xl font-bold text-blue-700 ">
+                {" "}
+                <span className="text-xl text-black font-bold mr-2">
+                  Welcome{" "}
+                </span>{" "}
+                John Doe!
+              </h1>
+              <p className="text-black mt-2 text-sm pr-20">
+                Busitron empowers businesses with smart solutions, streamlining
+                operations and driving success with innovation and efficiency.
+              </p>
+            </div>
+          </div>
+
+          {/* 2nd row*/}
+          <div className="grid grid-cols-4 gap-6 mt-9 ">
+            {[
+              { label: "Users", value: "1000+", percent: 80, color: "#6366F1" }, // Blue
+              {
+                label: "Projects",
+                value: "500+",
+                percent: 70,
+                color: "#14B8A6",
+              }, // Teal
+              {
+                label: "Empoyers",
+                value: "1000+",
+                percent: 75,
+                color: "#EC4899",
+              }, // Pink
+              {
+                label: "Worth",
+                value: "$10000",
+                percent: 85,
+                color: "#3B82F6",
+              }, // Blue variant
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-2xl shadow-md p-3 flex flex-row gap-9 p-5 pl-5  items-center transition-transform transform hover:scale-105 duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <div className="relative w-16 h-16 flex items-center justify-center">
+                  <svg className="absolute w-full h-full" viewBox="0 0 36 36">
+                    {/* Background Circle */}
+                    <circle
+                      className="text-gray-200 stroke-current"
+                      strokeWidth="3"
+                      cx="18"
+                      cy="18"
+                      r="16"
+                      fill="none"
+                      strokeOpacity="0.2"
+                    ></circle>
+
+                    {/* Animated Progress Circle with Disappearing Effect */}
+                    <motion.circle
+                      stroke={item.color}
+                      strokeWidth="3"
+                      strokeDasharray="100"
+                      strokeDashoffset="100"
+                      strokeLinecap="round"
+                      cx="18"
+                      cy="18"
+                      r="16"
+                      fill="none"
+                      initial={{ strokeDashoffset: 100, opacity: 1 }}
+                      animate={{
+                        strokeDashoffset: 100 - item.percent,
+                        opacity: [1, 1, 0], // Fully visible → Stay → Disappear
+                      }}
+                      transition={{
+                        duration: 2,
+                        ease: "easeInOut",
+                        times: [0, 0.7, 1],
+                        repeat: Infinity, // Infinite loop
+                      }}
+                    ></motion.circle>
+                  </svg>
+                  <span className="text-lg font-bold text-gray-700">
+                    {item.percent}%
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mt-2 text-gray-900">
+                    {item.value}
+                  </h3>
+                  <p className="text-gray-500 text-sm">{item.label}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
 
-
-       
-
-        {/* 2nd row*/}
-        <div className="grid grid-cols-4 gap-6 mt-9 ">
-          {[
-            { label: "Users", value: "1000+", percent: 80, color: "#6366F1" }, // Blue
-            { label: "Projects", value: "500+", percent: 70, color: "#14B8A6" }, // Teal
-            {
-              label: "Empoyers",
-              value: "1000+",
-              percent: 75,
-              color: "#EC4899",
-            }, // Pink
-            { label: "Worth", value: "$10000", percent: 85, color: "#3B82F6" }, // Blue variant
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              className="bg-white rounded-2xl shadow-md p-3 flex flex-row gap-9 p-5 pl-5  items-center transition-transform transform hover:scale-105 duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-            >
-              <div className="relative w-16 h-16 flex items-center justify-center">
-                <svg className="absolute w-full h-full" viewBox="0 0 36 36">
-                  {/* Background Circle */}
-                  <circle
-                    className="text-gray-200 stroke-current"
-                    strokeWidth="3"
-                    cx="18"
-                    cy="18"
-                    r="16"
-                    fill="none"
-                    strokeOpacity="0.2"
-                  ></circle>
-
-                  {/* Animated Progress Circle with Disappearing Effect */}
-                  <motion.circle
-                    stroke={item.color}
-                    strokeWidth="3"
-                    strokeDasharray="100"
-                    strokeDashoffset="100"
-                    strokeLinecap="round"
-                    cx="18"
-                    cy="18"
-                    r="16"
-                    fill="none"
-                    initial={{ strokeDashoffset: 100, opacity: 1 }}
-                    animate={{
-                      strokeDashoffset: 100 - item.percent,
-                      opacity: [1, 1, 0], // Fully visible → Stay → Disappear
-                    }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.7, 1],
-                      repeat: Infinity, // Infinite loop
-                    }}
-                  ></motion.circle>
-                </svg>
-                <span className="text-lg font-bold text-gray-700">
-                  {item.percent}%
-                </span>
-              </div>
-              <div>
-              <h3 className="text-xl font-bold mt-2 text-gray-900">
-                {item.value}
-              </h3>
-              <p className="text-gray-500 text-sm">{item.label}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-
-       {/* 3rd row */}
-       <div className="bg-gray-800 text-white p-6 ">
+        {/* 3rd row */}
+        <div className="bg-gray-800 text-white p-6 ">
           <div className="grid grid-cols-3 gap-6 ">
             {/* Left Card */}
             <div className="bg-gray-900 rounded-2xl p-6 shadow-[0px_0px_5px_white]  h-90 pt-20 transition-transform transform hover:scale-102 duration-300">
@@ -196,8 +207,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </>
-    
   );
 }

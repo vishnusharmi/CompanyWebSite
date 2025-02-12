@@ -1,21 +1,23 @@
+import Header from "../header/Header";
 import Footer from "./layout/Footer";
-import Header from "./layout/Header";
 import SideBar from "./layout/SiderBar";
 import { Outlet } from "react-router-dom";
 
 const AdminDashboardPage = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex flex-col bg-gray-100 min-h-screen h-screen">
       {/* Header */}
       <Header />
 
       {/* Main Content Area */}
-      <div className="flex " >
+      <div className="grid grid-cols-12 flex-grow h-0 flex-1">
         {/* SideBar */}
-        <SideBar />
+        <div className="overflow-y-hidden col-span-2">
+          <SideBar />
+        </div>
 
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="overflow-y-auto h-full col-span-10">
           <Outlet /> {/* This will render nested routes */}
         </div>
       </div>

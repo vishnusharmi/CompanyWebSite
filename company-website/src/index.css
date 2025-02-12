@@ -1,21 +1,19 @@
 @import "tailwindcss";
 
-
-
-body{
-margin:0;
-padding:0;
-box-sizing: border-box;
-overflow-y: hidden;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: hidden;
 }
 
-::-webkit-scrollbar{
-    width:8px;
+::-webkit-scrollbar {
+  width: 8px;
 }
-::-webkit-scrollbar-thumb{
-    background-color: gray;
-    border-radius: 4px;
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover{
-    background-color: cornflowerblue;
+::-webkit-scrollbar-thumb:hover {
+  background-color: cornflowerblue;
 }

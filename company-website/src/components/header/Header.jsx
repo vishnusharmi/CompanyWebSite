@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FaBell } from "react-icons/fa";
-import Profile from "../../utils/Profile";
-import Notifications from "../../utils/Notifications";
-import logo from "../../../assets/BusitronLogo.jpg"; // Adjust the path to your local logo
+import Profile from "../utils/Profile";
+import Notifications from "../utils/Notifications";
+import logo from "../../assets/BusitronLogo.jpg"; // Adjust the path to your local logo
 
 const Header = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -21,7 +21,7 @@ const Header = () => {
 
   // bg-gray-800
   return (
-    <header className="bg-linear-to-r from-gray-600 to-gray-800 text-white py-2 px-8 border-b border-gray-700 flex justify-between items-center relative">
+    <header className="bg-linear-to-r from-gray-600 to-gray-800 text-white py-2 px-8 border-b border-gray-700 flex justify-between items-center w-full sticky top-0 z-50">
       {/* Left Side: Branding */}
       <div className="flex items-center space-x-2">
         <img
@@ -35,14 +35,14 @@ const Header = () => {
       {/* Right Side: Notification and User Profile */}
       <div className="flex items-center space-x-6">
         {/* Notification Icon */}
-          <Link to={'/admin/notification'}>
-          <button className="relative">
-          <FaBell className="text-lg hover:text-gray-300 transition-colors duration-300" />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-            3
-          </span>
-        </button>
-          </Link>
+        <Link to="/admin/notification">
+          <button className="relative cursor-pointer">
+            <FaBell className="hover:text-gray-300 transition-colors duration-300 h-6 " />
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+              3
+            </span>
+          </button>
+        </Link>
 
         {/* User Profile Button */}
         <button
