@@ -44,7 +44,7 @@ const ThirdPartySideBar = () => {
             <FaFileAlt className="mr-2" /> Performance Metrics
           </Link>
           <Link
-            to={"/company/communcation"}
+            to={"/company/communication"}
             className="flex items-center py-2 hover:bg-gray-600 rounded transition-colors duration-300"
           >
             <FaFileAlt className="mr-2" /> Communication
