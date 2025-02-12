@@ -1,5 +1,5 @@
-const express = require('express');
-const dotenv = require('dotenv');
+const express = require("express");
+const dotenv = require("dotenv");
 // const cors = require('cors');
 const sequelize = require('./config/db');
 const userRouter = require('./routes/user-route');
@@ -23,6 +23,9 @@ app.use('/users',userRouter);
 const PORT = process.env.PORT || 5000;
 
 // Start Server
-sequelize.sync({alert: true}).then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}).catch(err => console.log("DB Connection Error:", err));
+sequelize
+  .sync({ alert: true })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => console.log("DB Connection Error:", err));
