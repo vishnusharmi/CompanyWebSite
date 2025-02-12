@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/DbConnection');
+const sequelize = require('../config/db');
 
 const Users = sequelize.define('users', {
   id: {
@@ -51,6 +51,13 @@ const Users = sequelize.define('users', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false,
+  },confirmPassword:{
+    type: DataTypes.STRING,  
+    allowNull: true
+  },
+  newPassword:{
+    type: DataTypes.STRING,  
+    allowNull: true
   }
 });
 
