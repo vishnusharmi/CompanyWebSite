@@ -20,8 +20,8 @@ const EmpDashboardPage = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <EmployeeFooter />
+    
+     
     </div>
   );
 };
