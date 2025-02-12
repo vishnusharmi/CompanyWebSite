@@ -2,42 +2,70 @@ import { useState } from "react";
 import {
   FaBars,
   FaTimes,
-  FaChevronRight,
-  FaChevronDown,
-  FaUser,
-  FaMoneyBillAlt,
-  FaBell,
-  FaListAlt,
+  // FaChevronRight,
+  // FaChevronDown,
+  // FaUser,
+  // FaMoneyBillAlt,
+  // FaBell,
+  // FaListAlt,
+  FaSignOutAlt,
+  FaTasks,
 } from "react-icons/fa";
+import { CgPerformance } from "react-icons/cg";
+import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const EmployeeSideBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false); // Manage dropdown state
+  // const [isServicesOpen, setIsServicesOpen] = useState(false); // Manage dropdown state
 
   return (
     <>
       {/* Sidebar for larger screens */}
-      <nav className="bg-gray-700 text-white w-54 flex-shrink-0 hidden md:block">
-        <div className="p-4">
+      <nav className="bg-gray-900 text-white  flex-shrink-0 bottom-0 z-50 flex flex-col relative h-dvh">
+        {/* Sidebar Header */}
+
+        {/* Sidebar Menu Items */}
+        <div className="p-2 flex flex-col space-y-2 overflow-y-auto">
           <Link
-            to={"/user"}
-            className="flex items-center py-2 hover:bg-gray-600 rounded transition-colors duration-300"
+            to="/employee"
+            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
           >
-            Dashboard
-          </Link>
-          <Link
-            to={"/employee/task"}
-            className="flex items-center py-2 hover:bg-gray-600 rounded transition-colors duration-300"
-          >
-            <FaListAlt className="mr-2" /> Task Management:
+            <span className="text-xl">
+              <TbLayoutDashboardFilled />
+            </span>
+            <span className="font-medium">Dashboard</span>
           </Link>
 
           <Link
-            to={"/employee/performance"}
-            className="flex items-center py-2 hover:bg-gray-600 rounded transition-colors duration-300"
+            to="/employee/task"
+            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
           >
-            <FaBell className="mr-2" /> Performance Tracking
+            <span className="text-xl">
+              <FaTasks />
+            </span>
+            <span className="font-medium">Task Management</span>
+          </Link>
+
+          <Link
+            to="/employee/performance"
+            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
+          >
+            <span className="text-xl">
+              <CgPerformance />
+            </span>
+            <span className="font-medium">Performance Tracking</span>
+          </Link>
+        </div>
+
+        <div className="p-3 w-full absolute bottom-13 mb-4">
+          <div className="h-0.5 bg-gray-500 mx-2 mb-2" />
+          <Link
+            to="/logout"
+            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-white text-xl"
+          >
+            <FaSignOutAlt className="text-xl" />
+            <span className="text-sm font-medium text-white">Logout</span>
           </Link>
         </div>
       </nav>
@@ -50,78 +78,40 @@ const EmployeeSideBar = () => {
         {isMenuOpen ? <FaTimes /> : <FaBars />}
       </button>
 
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsMenuOpen(false)}
-        ></div>
-      )}
-
       {/* Mobile Sidebar Content */}
       <div
         className={`md:hidden fixed inset-y-0 left-0 w-64 bg-gray-700 text-white transform transition-transform duration-300 ease-in-out z-50 ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-4">
-          <a
-            href="#"
-            className="block py-2 hover:bg-gray-600 rounded transition-colors duration-300"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="block py-2 hover:bg-gray-600 rounded transition-colors duration-300"
-          >
-            About
-          </a>
-          <div className="relative group">
-            {/* Services Button for Mobile */}
-            <button
-              onClick={() => setIsServicesOpen(!isServicesOpen)} // Toggle dropdown
-              className="w-full text-left py-2 hover:bg-gray-600 rounded transition-colors duration-300 flex items-center justify-between"
-            >
-              Services
-              {/* Right/Down Arrow Icon for Mobile */}
-              {isServicesOpen ? (
-                <FaChevronDown className="ml-2" />
-              ) : (
-                <FaChevronRight className="ml-2" />
-              )}
-            </button>
-
-            {/* Dropdown for Services in Mobile */}
-            {isServicesOpen && (
-              <div className="pl-4 mt-2 space-y-2">
-                <a
-                  href="#"
-                  className="block py-2 hover:bg-gray-600 rounded transition-colors duration-300"
+        <div className="p-4 flex flex-col h-full">
+          <div className="flex-grow space-y-2 overflow-y-auto">
+            {/* {menuItems.map((item) => (
+              <Link
+                key={item.id}
+                to={item.link}
+                className="flex items-center space-x-3 px-4 py-2 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-white"
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span
+                  className={`${item.font ? item.font : "text-sm"} font-medium`}
                 >
-                  Web Development
-                </a>
-                <a
-                  href="#"
-                  className="block py-2 hover:bg-gray-600 rounded transition-colors duration-300"
-                >
-                  App Development
-                </a>
-                <a
-                  href="#"
-                  className="block py-2 hover:bg-gray-600 rounded transition-colors duration-300"
-                >
-                  SEO Services
-                </a>
-              </div>
-            )}
+                  {item.name}
+                </span>
+              </Link>
+            ))} */}
           </div>
-          <a
-            href="#"
-            className="block py-2 hover:bg-gray-600 rounded transition-colors duration-300"
-          >
-            Contact
-          </a>
+
+          {/* Mobile Logout Button at the Bottom */}
+          <div className="p-4">
+            <Link
+              to="/logout"
+              className="flex items-center space-x-3 px-4 py-2 w-full transition-colors duration-200 rounded-lg hover:bg-red-600 hover:text-white"
+            >
+              <FaSignOutAlt className="text-lg" />
+              <span className="text-sm font-medium">Logout</span>
+            </Link>
+          </div>
         </div>
       </div>
     </>

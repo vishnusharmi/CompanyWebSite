@@ -17,7 +17,7 @@ const ThirdPartySideBar = () => {
   return (
     <>
       {/* Sidebar for larger screens */}
-      <nav className="bg-gray-700 text-white w-54 flex-shrink-0 hidden md:block">
+      <nav className="bg-gray-700 text-white flex-shrink-0 hidden h-dvh md:block">
         <div className="p-4">
           <Link
             to={"/company"}
@@ -44,7 +44,7 @@ const ThirdPartySideBar = () => {
             <FaFileAlt className="mr-2" /> Performance Metrics
           </Link>
           <Link
-            to={"/company/communcation"}
+            to={"/company/communication"}
             className="flex items-center py-2 hover:bg-gray-600 rounded transition-colors duration-300"
           >
             <FaFileAlt className="mr-2" /> Communication
