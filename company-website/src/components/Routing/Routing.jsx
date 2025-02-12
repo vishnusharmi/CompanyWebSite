@@ -24,6 +24,7 @@ import EmployeeDashboardPage from "../employeeDash/EmpDashboardPage";
 import PerformanceTracking from "../employeeDash/pages/performanceTracking/PerformanceTracking";
 import EmployeeTask from "../employeeDash/pages/taskManagement/TaskManagement"
 import NotificationSystem from "../adminDash/pages/notifications/Notification";
+import LoginVerify from "../loginRegister/LoginVerify";
 
 
 
@@ -36,7 +37,7 @@ function Routing() {
           <Route path="/login" element={<Login />} />
           <Route path="/forget-password" element={<Forget />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-
+          <Route path="/verify-otp" element={<LoginVerify/>}/>
 
           {/* Nested Route for Admin Dashboard */}
           <Route path="/admin" element={<AdminDashboard />}>
