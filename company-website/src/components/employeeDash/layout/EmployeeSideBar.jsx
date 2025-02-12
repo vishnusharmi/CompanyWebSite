@@ -22,7 +22,7 @@ const EmployeeSideBar = () => {
   return (
     <>
       {/* Sidebar for larger screens */}
-      <nav className="bg-gray-900 text-white  flex-shrink-0 bottom-0 z-50 flex flex-col relative h-dvh">
+      <nav className="bg-gray-900 text-white flex-shrink-0 bottom-0 z-50 flex flex-col relative h-dvh">
         {/* Sidebar Header */}
 
         {/* Sidebar Menu Items */}

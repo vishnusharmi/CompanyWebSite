@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import { useState, useEffect } from "react";
+import {
   Download,
   Filter,
   Plus,
@@ -7,8 +7,8 @@ import {
   X,
   Pencil,
   Trash2,
-  AlertCircle
-} from 'lucide-react';
+  AlertCircle,
+} from "lucide-react";
 
 const TaskManagement = () => {
   // ----- Task State -----
@@ -21,7 +21,7 @@ const TaskManagement = () => {
       deadline: "2025-02-15",
       status: "in-progress",
       progress: 65,
-      priority: "high"
+      priority: "high",
     },
     {
       id: 2,
@@ -31,13 +31,13 @@ const TaskManagement = () => {
       deadline: "2025-02-20",
       status: "pending",
       progress: 0,
-      priority: "medium"
-    }
+      priority: "medium",
+    },
   ]);
 
   // Load tasks from localStorage on mount
   useEffect(() => {
-    const storedTasks = localStorage.getItem('tasks');
+    const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
       setTasks(JSON.parse(storedTasks));
     }
@@ -45,22 +45,22 @@ const TaskManagement = () => {
 
   // Save tasks to localStorage on every update
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   // ----- Other States -----
-  const [filterStatus, setFilterStatus] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
   // New Task Modal state
   const [newTask, setNewTask] = useState({
-    title: '',
-    assignedTo: '',
-    assigneeType: 'employee',
-    deadline: '',
-    status: 'pending',
+    title: "",
+    assignedTo: "",
+    assigneeType: "employee",
+    deadline: "",
+    status: "pending",
     progress: 0,
-    priority: 'low'
+    priority: "low",
   });
   const [showAddTask, setShowAddTask] = useState(false);
 
@@ -74,19 +74,19 @@ const TaskManagement = () => {
   // ----- Helper Functions -----
   const getStatusColor = (status) => {
     const colors = {
-      'completed': 'bg-green-100 text-green-800',
-      'in-progress': 'bg-blue-100 text-blue-800',
-      'pending': 'bg-yellow-100 text-yellow-800',
-      'overdue': 'bg-red-100 text-red-800'
+      completed: "bg-green-100 text-green-800",
+      "in-progress": "bg-blue-100 text-blue-800",
+      pending: "bg-yellow-100 text-yellow-800",
+      overdue: "bg-red-100 text-red-800",
     };
-    return colors[status] || 'bg-gray-100 text-gray-800';
+    return colors[status] || "bg-gray-100 text-gray-800";
   };
 
   const getPriorityIcon = (priority) => {
     switch (priority) {
-      case 'high':
+      case "high":
         return <AlertCircle className="h-5 w-5 text-red-500" />;
-      case 'medium':
+      case "medium":
         return <AlertCircle className="h-5 w-5 text-yellow-500" />;
       default:
         return <AlertCircle className="h-5 w-5 text-blue-500" />;
@@ -94,14 +94,23 @@ const TaskManagement = () => {
   };
 
   const getProgressBarColor = (progress) => {
-    if (progress <= 20) return 'bg-red-600';
-    if (progress < 80) return 'bg-blue-600';
-    return 'bg-green-600';
+    if (progress <= 20) return "bg-red-600";
+    if (progress < 80) return "bg-blue-600";
+    return "bg-green-600";
   };
 
   const generateReport = () => {
-    const headers = ["ID", "Title", "Assigned To", "Assignee Type", "Deadline", "Status", "Progress", "Priority"];
-    const rows = tasks.map(task => [
+    const headers = [
+      "ID",
+      "Title",
+      "Assigned To",
+      "Assignee Type",
+      "Deadline",
+      "Status",
+      "Progress",
+      "Priority",
+    ];
+    const rows = tasks.map((task) => [
       task.id,
       `"${task.title}"`,
       `"${task.assignedTo}"`,
@@ -109,14 +118,16 @@ const TaskManagement = () => {
       task.deadline,
       task.status,
       task.progress,
-      task.priority
+      task.priority,
     ]);
-    const csvContent = [headers, ...rows].map(row => row.join(",")).join("\n");
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const csvContent = [headers, ...rows]
+      .map((row) => row.join(","))
+      .join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', 'task_report.csv');
+    link.setAttribute("download", "task_report.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -125,23 +136,23 @@ const TaskManagement = () => {
   // ----- New Task Modal Handlers -----
   const handleAddTask = () => {
     if (
-      newTask.title.trim() === '' || 
-      newTask.assignedTo.trim() === '' || 
-      newTask.deadline.trim() === ''
+      newTask.title.trim() === "" ||
+      newTask.assignedTo.trim() === "" ||
+      newTask.deadline.trim() === ""
     ) {
-      alert('Please fill in all required fields.');
+      alert("Please fill in all required fields.");
       return;
     }
     const newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
     setTasks([...tasks, { ...newTask, id: newId }]);
     setNewTask({
-      title: '',
-      assignedTo: '',
-      assigneeType: 'employee',
-      deadline: '',
-      status: 'pending',
+      title: "",
+      assignedTo: "",
+      assigneeType: "employee",
+      deadline: "",
+      status: "pending",
       progress: 0,
-      priority: 'low'
+      priority: "low",
     });
     setShowAddTask(false);
   };
@@ -154,16 +165,16 @@ const TaskManagement = () => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditTask(prev => ({
+    setEditTask((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    setTasks(prevTasks =>
-      prevTasks.map(task =>
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
         task.id === editTask.id ? { ...editTask } : task
       )
     );
@@ -177,7 +188,7 @@ const TaskManagement = () => {
   };
 
   const handleDeleteConfirm = (id) => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     setItemToDelete(null);
   };
 
@@ -186,9 +197,10 @@ const TaskManagement = () => {
   };
 
   // ----- Filtering Tasks -----
-  const filteredTasks = tasks.filter(task => 
-    (filterStatus === 'all' || task.status === filterStatus) &&
-    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredTasks = tasks.filter(
+    (task) =>
+      (filterStatus === "all" || task.status === filterStatus) &&
+      task.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -198,7 +210,7 @@ const TaskManagement = () => {
       {showAddTask && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/70 bg-opacity-50 z-50">
           <div className="bg-white rounded-lg p-6 shadow-lg border relative w-full max-w-md">
-            <button 
+            <button
               onClick={() => setShowAddTask(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >
@@ -207,39 +219,55 @@ const TaskManagement = () => {
             <h2 className="text-xl font-bold mb-4">Add New Task</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Task Title</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter task title" 
-                  value={newTask.title} 
-                  onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Task Title
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter task title"
+                  value={newTask.title}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, title: e.target.value })
+                  }
+                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Assigned To</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter assignee name" 
-                  value={newTask.assignedTo} 
-                  onChange={(e) => setNewTask({ ...newTask, assignedTo: e.target.value })}
-                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Assigned To
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter assignee name"
+                  value={newTask.assignedTo}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, assignedTo: e.target.value })
+                  }
+                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
-                <input 
-                  type="date" 
-                  value={newTask.deadline} 
-                  onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
-                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Deadline
+                </label>
+                <input
+                  type="date"
+                  value={newTask.deadline}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, deadline: e.target.value })
+                  }
+                  className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Priority
+                </label>
                 <select
                   value={newTask.priority}
-                  onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, priority: e.target.value })
+                  }
                   className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="low">Low</option>
@@ -248,13 +276,13 @@ const TaskManagement = () => {
                 </select>
               </div>
               <div className="flex justify-end space-x-3 mt-6">
-                <button 
+                <button
                   onClick={() => setShowAddTask(false)}
                   className="px-4 py-2 text-gray-600 hover:text-gray-800"
                 >
                   Cancel
                 </button>
-                <button 
+                <button
                   onClick={handleAddTask}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
@@ -270,8 +298,11 @@ const TaskManagement = () => {
       {showEditModal && editTask && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/70 bg-opacity-50 z-50">
           <div className="bg-white rounded-lg p-6 shadow-lg border relative w-full max-w-md">
-            <button 
-              onClick={() => { setShowEditModal(false); setEditTask(null); }}
+            <button
+              onClick={() => {
+                setShowEditModal(false);
+                setEditTask(null);
+              }}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >
               <X className="h-6 w-6" />
@@ -280,8 +311,10 @@ const TaskManagement = () => {
             <form onSubmit={handleEditSubmit}>
               {/* Pre-populated fields similar to the New Task modal */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Task Title</label>
-                <input 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Task Title
+                </label>
+                <input
                   type="text"
                   name="title"
                   value={editTask.title}
@@ -291,8 +324,10 @@ const TaskManagement = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Assigned To</label>
-                <input 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Assigned To
+                </label>
+                <input
                   type="text"
                   name="assignedTo"
                   value={editTask.assignedTo}
@@ -302,8 +337,10 @@ const TaskManagement = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
-                <input 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Deadline
+                </label>
+                <input
                   type="date"
                   name="deadline"
                   value={editTask.deadline}
@@ -313,7 +350,9 @@ const TaskManagement = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Priority
+                </label>
                 <select
                   name="priority"
                   value={editTask.priority}
@@ -327,7 +366,9 @@ const TaskManagement = () => {
               </div>
               {/* The Status dropdown */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Status
+                </label>
                 <select
                   name="status"
                   value={editTask.status}
@@ -342,14 +383,17 @@ const TaskManagement = () => {
                 </select>
               </div>
               <div className="flex justify-end gap-4">
-                <button 
+                <button
                   type="button"
-                  onClick={() => { setShowEditModal(false); setEditTask(null); }}
+                  onClick={() => {
+                    setShowEditModal(false);
+                    setEditTask(null);
+                  }}
                   className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
                 >
                   Cancel
                 </button>
-                <button 
+                <button
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
@@ -390,16 +434,16 @@ const TaskManagement = () => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Task Management</h1>
           <div className="flex space-x-4">
-            <button 
+            <button
               onClick={generateReport}
-              className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+              className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 cursor-pointer transition-all"
             >
               <Download className="h-5 w-5 mr-2" />
               Export Report
             </button>
-            <button 
+            <button
               onClick={() => setShowAddTask(true)}
-              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer transition-all"
             >
               <Plus className="h-5 w-5 mr-2" />
               New Task
@@ -411,7 +455,7 @@ const TaskManagement = () => {
         <div className="flex justify-between items-center mb-6">
           <div className="flex space-x-4">
             <div className="relative">
-              <select 
+              <select
                 className="pl-10 pr-4 py-2 border rounded-lg appearance-none bg-white"
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
@@ -442,50 +486,80 @@ const TaskManagement = () => {
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Task</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned To</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deadline</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Task
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Assigned To
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Deadline
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Progress
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Priority
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {filteredTasks.map(task => (
+              {filteredTasks.map((task) => (
                 <tr key={task.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900">{task.title}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{task.assignedTo}</td>
-                  <td className="px-6 py-4 text-sm text-gray-900">{task.deadline}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    {task.title}
+                  </td>
                   <td className="px-6 py-4 text-sm text-gray-900">
-                    <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(task.status)}`}>
+                    {task.assignedTo}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">
+                    {task.deadline}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-900">
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${getStatusColor(
+                        task.status
+                      )}`}
+                    >
                       {task.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">
                     <div className="w-full bg-gray-200 rounded-full h-2.5">
-                      <div 
-                        className={`${getProgressBarColor(task.progress)} h-2.5 rounded-full`}
+                      <div
+                        className={`${getProgressBarColor(
+                          task.progress
+                        )} h-2.5 rounded-full`}
                         style={{ width: `${task.progress}%` }}
                       ></div>
                     </div>
-                    <span className="text-xs text-gray-500 mt-1">{task.progress}%</span>
+                    <span className="text-xs text-gray-500 mt-1">
+                      {task.progress}%
+                    </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">
                     <div className="flex items-center">
                       {getPriorityIcon(task.priority)}
-                      <span className="ml-2 text-sm text-gray-900">{task.priority}</span>
+                      <span className="ml-2 text-sm text-gray-900">
+                        {task.priority}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm">
                     <div className="flex gap-2">
-                      <button 
+                      <button
                         onClick={() => openEditModal(task)}
                         className="p-2 hover:bg-gray-100 rounded"
                       >
                         <Pencil className="h-5 w-5 text-blue-600" />
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleDelete(task)}
                         className="p-2 hover:bg-gray-100 rounded"
                       >
