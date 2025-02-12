@@ -1,57 +1,64 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../db");
+const { DataTypes } = require('sequelize');
+const sequelize = require("../config/db")
 
 const Users = sequelize.define('users', {
   id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-    },
-    full_name: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-    },
-    email: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: { isEmail: true }
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  phonenumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
         unique: true,
-    },
-    phone:{
-        type: DataTypes.INTEGER
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    roleId: {
-        type: DataTypes.INTEGER
-    },
-    roleName :{
-        type: DataTypes.STRING,
-        allowNull:false,
-    },
-    created_at: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-    },
-    updated_at: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-    },
-    is_active:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
-    },
-    email_otp: {
-        type: DataTypes.STRING,
-    },
-    mobile_otp: {
-        type: DataTypes.STRING,
-    },
-}, { 
-    timestamps: false,
+      },
+  role: {
+    type: DataTypes.ENUM('admin', 'employee', 'company'),
+    allowNull: false,
+    defaultValue: 'employee'
+  },
+ 
+  otp: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  otpExpiresAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  
+
+  image: {
+    type: DataTypes.STRING,  
+    allowNull: true
+  },
+  isActive:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },confirmPassword:{
+    type: DataTypes.STRING,  
+    allowNull: true
+  },
+  newPassword:{
+    type: DataTypes.STRING,  
+    allowNull: true
+  }
 });
 
-sequelize.sync().then( ()=> console.log(" User table created")).catch((err)=>console.log(err))
-
-module.exports = User;
+module.exports = Users;
