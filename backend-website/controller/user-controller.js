@@ -1,10 +1,15 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const user = require('../models/user');
-const upload = require('../middlewares/UploadMiddleware');
+const upload = require('../middlewares/image-upload');
 const fs = require('fs');
-require('dotenv').config();
-const { generateOTP, sendOTPEmail } = require('../utils/optService');
+const {findByEmail,registerUser, findUserByValidOTP}=require('../services/user-service')
+const { generateOTP, sendOTPEmail } = require('../utils/otp-util');
+
+
+
+
+
+
 
 exports.register = async (req, res) => {
   let imagePath = req.file ? req.file.path : null;
@@ -13,7 +18,7 @@ exports.register = async (req, res) => {
     const { username, email, password, phonenumber, role } = req.body;
 
     // Check if user already exists
-    const existingUser = await user.findOne({ where: { email } });
+    const existingUser = await findByEmail(email)
     if (existingUser) {
       if (imagePath) {
         fs.unlink(imagePath, (err) => {
@@ -27,15 +32,7 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create User
-    const newUser = await user.create({
-      username,
-      email,
-      password: hashedPassword,
-      phonenumber,
-      role: role || 'user',
-      image: imagePath,
-      isVerified: false, // User must verify OTP before login
-    });
+    const newUser = await registerUser({username,email,password:hashedPassword,phonenumber,role});
 
     res.status(201).json({ message: 'User registered successfully. Please log in to receive OTP.', userId: newUser.id });
   } catch (error) {
@@ -52,12 +49,12 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+exports.validateLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Check if user exists
-    const existingUser = await user.findOne({ where: { email } });
+    const existingUser = await findByEmail(email);
     if (!existingUser) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -69,14 +66,14 @@ exports.login = async (req, res) => {
     }
 
     // Generate OTP and store in database
-    const otp = generateOTP();
-    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 min expiration
+    const {otp,otpExpiresAt} = generateOTP();
+     // 10 min expiration
 
     await existingUser.update({ otp, otpExpiresAt });
     await sendOTPEmail(email, otp);
 
     const token = jwt.sign(
-      { id: existingUser.id, email: existingUser.email, role: existingUser.role },
+      {existingUser},
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );
@@ -93,7 +90,7 @@ exports.verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
 
     // Find user by email
-    const existingUser = await user.findOne({ where: { email } });
+    const existingUser =await findByEmail(email)
     if (!existingUser) {
       return res.status(400).json({ error: 'User not found' });
     }
@@ -104,18 +101,73 @@ exports.verifyOTP = async (req, res) => {
     }
 
     // Mark user as verified and remove OTP fields
-    await existingUser.update({ isVerified: true, otp: null, otpExpiresAt: null });
+    await existingUser.update({isActive: true, otp: null, otpExpiresAt: null });
 
-    // Generate JWT Token
-    const token = jwt.sign(
-      { id: existingUser.id, email: existingUser.email, role: existingUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '2h' }
-    );
-
-    res.json({ token, message: 'Login successful' });
+    res.status(200).json({
+      message:"OTP Verified successfully"
+    })
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error', details: error.message });
   }
 };
+
+
+exports.forgetPassword=async(req,res)=>{
+
+  const {email}=req.body;
+
+  try{
+
+    //check user is exist or not
+    const emailData=await findByEmail(email);
+    if(!emailData){
+      res.status(404).json({
+        message:"email not found"
+      })
+
+    }
+    const {otp,otpExpiresAt} = generateOTP();
+
+    //update otp in db
+    await emailData.update({ otp, otpExpiresAt });
+    await sendOTPEmail(email,otp)
+    res.status(200).json({message:"otp sent given email successfully",statusCode:200
+
+    })
+
+  }catch(e){
+    console.error(e);
+    res.status(500).json({ error: 'Server error', details: e.message });
+  }
+}
+
+exports.resetPassword=async(req,res)=>{
+  const{email,confirmPassword,newPassword,otp}=req.body;
+
+  try{
+    if(confirmPassword!==newPassword){
+      return res.status(404).json({
+        message:"Password does'not match"
+      })
+    }
+    const user = await findUserByValidOTP({email,otp})
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid or expired OTP' });
+    }
+  
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+  
+    // Update password and clear OTP
+    await user.update({ password: hashedPassword, otp: null, otpExpiresAt: null });
+  
+    res.json({ message: 'Password reset successfully. You can now log in with your new password.' });
+  }catch(e){
+
+    console.error(error);
+    res.status(500).json({ error: 'Server error', details: error.message });
+}
+
+}
+

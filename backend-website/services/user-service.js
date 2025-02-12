@@ -1,52 +1,22 @@
-const User = require('../models/User')
+const userModel=require('../models/user');
+const { Op } = require('sequelize');
 
 
-exports.createUser = async(data) =>{
-    try {
-        const user = await User.create(data);
-        return user
-    } catch (error) {
-        console.log(error)
-    }
+exports.findByEmail=async(email)=>{
+
+const emailData=await userModel.findOne({ where: { email } });
+return emailData;
+
 }
 
-exports.getAllUsers = async() =>{
-    try {
-        const user = await User.findAll({});
-        return user
-    } catch (error) {
-        console.log(error)
-    }
+exports.registerUser=async(data)=>{
+    const userData=await userModel.create(data);
+    return userData;
 }
 
-exports.getUserById = async(id) =>{
-    try {
-        const user = await User.findByPk(id);
-        return user
-    } catch (error) {
-        console.log(error)
-    }
+exports.findUserByValidOTP=async({email,otp})=>{
+    const userData= await userModel.findOne({email,otp,otpExpiresAt: { [Op.gt]: new Date() }});
+    return userData;// OTP must not be expired})
+    
 }
 
-exports.updateUser = async(id) =>{
-    try {
-         const user = await User.findByPk(id);
-         if(!user){
-            return res.status(404).json({error: "User not found "})
-         }
-         const userUpdated = await user.update()
-        return userUpdated
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-exports.deleteUser = async (id) =>{
-    try {
-        const deleteuser = await User.findByPk(id);
-        const deletedUser = await deleteuser.destroy()
-        return deletedUser
-    } catch (error) {
-        console.log(error)
-    }
-}
