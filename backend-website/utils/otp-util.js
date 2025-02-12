@@ -17,7 +17,14 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to generate a 6-digit OTP
-const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
+
+const generateOTP = () =>{
+  const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
+  const otp=Math.floor(100000 + Math.random() * 900000).toString();
+  return {otp,otpExpiresAt}
+
+} 
+
 
 // Function to send OTP email
 const sendOTPEmail = async (email, otp) => {
