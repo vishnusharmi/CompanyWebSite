@@ -42,7 +42,6 @@ const Users = sequelize.define('users', {
     allowNull: true,
   },
   
-
   image: {
     type: DataTypes.STRING,  
     allowNull: true
@@ -62,3 +61,4 @@ const Users = sequelize.define('users', {
 });
 
 module.exports = Users;
+
