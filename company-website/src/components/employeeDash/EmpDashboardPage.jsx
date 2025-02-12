@@ -23,9 +23,6 @@ const EmpDashboardPage = () => {
           <Outlet /> {/* This will render nested routes */}
         </div>
       </div>
-
-      {/* Footer */}
-      {/* <EmployeeFooter /> */}
     </div>
   );
 };
