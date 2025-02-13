@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(verifyToken)
 app.use('/users',userRouter);
 
-app.use(cors(corsOpts));
+app.use(cors());
 //verify-token middleware
 // app.use(verifyToken);
 app.use("/users", userRouter);
