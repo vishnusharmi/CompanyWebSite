@@ -1,5 +1,5 @@
-import React from "react";
 import { FaTimes } from "react-icons/fa";
+import PropTypes from "prop-types";
 
 const notificationsData = [
   "This is a very long notification message that should be truncated because it exceeds our maximum allowed length for display.",
@@ -63,3 +63,7 @@ const Notifications = ({ onClose }) => {
 };
 
 export default Notifications;
+
+Notifications.propTypes = {
+  onClose: PropTypes.func,
+};
