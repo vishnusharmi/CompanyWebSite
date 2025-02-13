@@ -1,14 +1,14 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const upload = require("../middlewares/image-upload");
-const fs = require("fs");
-const {
-  findByEmail,
-  registerUser,
-  findUserByValidOTP,
-  getAllUsers,
-} = require("../services/user-service");
-const { generateOTP, sendOTPEmail } = require("../utils/otp-util");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const upload = require('../middlewares/image-upload');
+const fs = require('fs');
+const {findByEmail,registerUser, findUserByValidOTP}=require('../services/user-service')
+const { generateOTP, sendOTPEmail } = require('../utils/otp-util');
+
+
+
+
+
 
 exports.register = async (req, res) => {
   let imagePath = req.file ? req.file.path : null;
@@ -61,11 +61,11 @@ exports.register = async (req, res) => {
 exports.validateLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log(req.body);
     // Check if user exists
     const existingUser = await findByEmail(email);
     if (!existingUser) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: 'Invalid credentials1' });
     }
 
     // Verify password
