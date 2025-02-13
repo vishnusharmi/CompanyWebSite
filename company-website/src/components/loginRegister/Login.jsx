@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,6 +8,17 @@ const Login = () => {
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
+
+  // const navigate = useNavigate();
+  // const role = "employee";
+
+  // function handleFormSubmit(event) {
+  //   event.preventDefault();
+
+  //   if (role === "admin") return navigate("/admin");
+  //   if (role === "employee") return navigate("/employee");
+  //   if (role === "company") return navigate("/company");
+  // }
 
   return (
     <div
@@ -20,7 +31,10 @@ const Login = () => {
       <div className="flex w-full max-w-4xl relative z-10 shadow-2xl rounded-xl overflow-hidden">
         {/* Left Section */}
         <div className="w-1/2 bg-white/10 text-white rounded-xl shadow-lg p-10 flex flex-col justify-center items-center">
-          <h1 className="text-4xl font-bold mb-4 tracking-wide" style={{ fontFamily: 'Roboto, sans-serif' }}>
+          <h1
+            className="text-4xl font-bold mb-4 tracking-wide"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          >
             Busitron
           </h1>
           <p className="text-center text-lg leading-relaxed max-w-sm opacity-90">
@@ -31,13 +45,19 @@ const Login = () => {
 
         {/* Right Section - Login Form */}
         <div className="w-1/2 bg-white bg-opacity-80 backdrop-blur-lg p-8 flex flex-col justify-center">
-          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
+          <h2
+            className="text-3xl font-semibold text-center text-gray-800 mb-6"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          >
             Login
           </h2>
           <form>
             {/* Email Field */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-medium mb-1"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -51,11 +71,14 @@ const Login = () => {
 
             {/* Password Field */}
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="password">
+              <label
+                className="block text-gray-700 text-sm font-medium mb-1"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 id="password"
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 pr-10"
@@ -72,7 +95,7 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition duration-300 ease-in-out"
+              className="w-full cursor-pointer bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition duration-300 ease-in-out"
             >
               Login
             </button>
@@ -89,11 +112,9 @@ const Login = () => {
 
       {/* Create a Page Section */}
       <div className="relative z-10 mt-4">
-        
-          <p className="text-white text-sm hover:text-blue-400 transition duration-300 ease-in-out cursor-pointer">
-            Create a Page for a celebrity, brand, or business
-          </p>
-       
+        <p className="text-white text-sm hover:text-blue-400 transition duration-300 ease-in-out cursor-pointer">
+          Create a Page for a celebrity, brand, or business
+        </p>
       </div>
     </div>
   );
