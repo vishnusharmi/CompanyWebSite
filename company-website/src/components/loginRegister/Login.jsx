@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff,Loader } from 'lucide-react';
 import axios from 'axios';
-
 
 const Login = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
-  
 
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false); // To track loading state
 
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
@@ -18,16 +17,24 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
+
     try {
-      const response = await axios.post(`${baseURL}/auth/login`, userData);
+      const response = await axios.post(`${baseURL}/users/validate-login`, userData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const token = response.data.jwtoken;
+      sessionStorage.setItem('authToken', token); 
+
       console.log('Login successful:', response.data);
-      
-      // Navigate to OTP page on successful login
-      
+      navigate('/verify-otp', { state: { email: userData.email } });
+
     } catch (error) {
       console.error('Login failed:', error.response ? error.response.data : error.message);
+    } finally {
+      setLoading(false); // Stop loading
     }
-    navigate('/verify-otp',{ state: { email: userData.email }});
   };
 
   return (
@@ -88,14 +95,22 @@ const Login = () => {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </div>
             </div>
-
+            
             <button
-              type="submit"
-              className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition duration-300 ease-in-out"
-            >
-              Login
-            </button>
-
+  type="submit"
+  disabled={loading}
+  className={`w-full py-2 rounded-lg transition duration-300 ease-in-out flex items-center justify-center text-white ${
+    loading ? 'bg-emerald-500 cursor-not-allowed' : 'bg-emerald-500 hover:bg-emerald-600 cursor-pointer'
+  }`}
+>
+  {loading ? (
+    <>
+      <Loader className="h-5 w-5 animate-spin mr-2" /> Loading...
+    </>
+  ) : (
+    'Login'
+  )}
+</button>
             <Link to="/forget-password">
               <p className="text-center text-sm mt-3 text-blue-500 underline hover:text-blue-600">
                 Forgotten password?

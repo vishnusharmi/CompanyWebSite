@@ -9,7 +9,8 @@ export const AppProvider = ({ children }) => {
   const [role, setRole] = useState(null); // Stores user role (Super Admin, Third-Party Admin, Employee)
   const [tasks, setTasks] = useState([]); // Stores assigned tasks
   const [notifications, setNotifications] = useState([]); // Stores system notifications
-
+  
+  console.log(user)
   return (
     <AppContext.Provider value={{ user, setUser, role, setRole, tasks, setTasks, notifications, setNotifications }}>
       {children}
