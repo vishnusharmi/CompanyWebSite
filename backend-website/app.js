@@ -4,8 +4,8 @@ const dotenv = require("dotenv");
 const sequelize = require('./config/db');
 const userRouter = require('./routes/user-route');
 
-const{verifyToken}=require('./middlewares/verify-jwt')
-require('dotenv').config();
+const { verifyToken } = require("./middlewares/verify-jwt");
+require("dotenv").config();
 
 const app = express();
 // const corsOpts = {
@@ -21,11 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(verifyToken)
 app.use('/users',userRouter);
 
+app.use(cors(corsOpts));
+//verify-token middleware
+// app.use(verifyToken);
+app.use("/users", userRouter);
 
 //Routes
-
-
-
 
 const PORT = process.env.PORT || 5000;
 

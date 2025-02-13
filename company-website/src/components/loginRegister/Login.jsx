@@ -46,7 +46,10 @@ const Login = () => {
 
       <div className="flex w-full max-w-4xl relative z-10 shadow-2xl rounded-xl overflow-hidden">
         <div className="w-1/2 bg-white/10 text-white rounded-xl shadow-lg p-10 flex flex-col justify-center items-center">
-          <h1 className="text-4xl font-bold mb-4 tracking-wide" style={{ fontFamily: 'Roboto, sans-serif' }}>
+          <h1
+            className="text-4xl font-bold mb-4 tracking-wide"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          >
             Busitron
           </h1>
           <p className="text-center text-lg leading-relaxed max-w-sm opacity-90">
@@ -56,12 +59,18 @@ const Login = () => {
         </div>
 
         <div className="w-1/2 bg-white bg-opacity-80 backdrop-blur-lg p-8 flex flex-col justify-center">
-          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6" style={{ fontFamily: 'Roboto, sans-serif' }}>
+          <h2
+            className="text-3xl font-semibold text-center text-gray-800 mb-6"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          >
             Login
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-medium mb-1"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -76,11 +85,14 @@ const Login = () => {
             </div>
 
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-medium mb-1" htmlFor="password">
+              <label
+                className="block text-gray-700 text-sm font-medium mb-1"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 id="password"
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 pr-10"
