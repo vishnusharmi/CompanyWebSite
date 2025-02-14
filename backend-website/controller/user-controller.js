@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const upload = require('../middlewares/image-upload');
 const fs = require('fs');
-const {findByEmail,registerUser, findUserByValidOTP}=require('../services/user-service')
+const {findByEmail,registerUser, findUserByValidOTP,getAllUsers}=require('../services/user-service')
 const { generateOTP, sendOTPEmail } = require('../utils/otp-util');
 
 
