@@ -4,6 +4,7 @@ const upload = require('../middlewares/image-upload');
 const fs = require('fs');
 const {findByEmail,registerUser, findUserByValidOTP}=require('../services/user-service')
 const { generateOTP, sendOTPEmail } = require('../utils/otp-util');
+const userServices = require('../services/user-service');
 
 
 
@@ -171,3 +172,78 @@ exports.resetPassword=async(req,res)=>{
 
 }
 
+
+//get all users
+
+exports.getAllUser = async(req,res) => {
+    try {
+        const allUsers = await userServices.getAllUsers()
+        res.status(200).json({
+            success : true,
+            message : "User data",
+            allUsers
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Internal server error",
+            error : error.message
+        })
+    }
+};
+
+//get user by id
+exports.getUserById = async(req,res) => {
+    try {
+       const userById = await userServices.getSingleUserById(req.params.id)
+        res.status(200).json({
+            success : true,
+            message : "User data",
+            userById
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Internal server error",
+            error : error.message
+        })
+    }
+};
+
+
+//update user
+exports.updateUser = async(req,res) => {
+    try {
+      const updateUser = await userServices.updateUser(req.params.id)
+        
+        res.status(200).json({
+            success : true,
+            message : "User data",
+            updateUser
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Internal server error",
+            error : error.message
+        })
+    }
+};
+
+//delete user
+const deleteUser = async(req,res) => {
+    try {
+        const deleteUser = await userServices.deleteUser(req.params.id);
+        res.status(200).json({
+            success : true,
+            message : "User deleted",
+            deleteUser
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Internal server error",
+            error : error.message
+        })
+    }
+}
