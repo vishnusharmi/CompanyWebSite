@@ -1,5 +1,11 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const EmployeeDashboard = () => {
   // Sample data for the line chart
@@ -19,7 +25,9 @@ const EmployeeDashboard = () => {
             <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
               <span className="text-blue-600 text-xs">$</span>
             </div>
-            <span className="text-sm text-gray-600">Invoice Awaiting Payment</span>
+            <span className="text-sm text-gray-600">
+              Invoice Awaiting Payment
+            </span>
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-2xl font-semibold">45/76</span>
@@ -45,7 +53,9 @@ const EmployeeDashboard = () => {
           <div className="w-full h-1 bg-orange-100 rounded mt-4">
             <div className="w-4/6 h-full bg-orange-500 rounded"></div>
           </div>
-          <span className="text-sm text-gray-500 mt-2 block">52 Completed (60%)</span>
+          <span className="text-sm text-gray-500 mt-2 block">
+            52 Completed (60%)
+          </span>
         </div>
 
         {/* Projects */}
@@ -62,7 +72,9 @@ const EmployeeDashboard = () => {
           <div className="w-full h-1 bg-green-100 rounded mt-4">
             <div className="w-4/5 h-full bg-green-500 rounded"></div>
           </div>
-          <span className="text-sm text-gray-500 mt-2 block">16 Completed (80%)</span>
+          <span className="text-sm text-gray-500 mt-2 block">
+            16 Completed (80%)
+          </span>
         </div>
 
         {/* Conversion Rate */}
@@ -94,8 +106,20 @@ const EmployeeDashboard = () => {
                 <XAxis dataKey="month" axisLine={false} tickLine={false} />
                 <YAxis axisLine={false} tickLine={false} />
                 <Tooltip />
-                <Line type="monotone" dataKey="value1" stroke="#E5E7EB" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="value2" stroke="#4F46E5" strokeWidth={2} dot={false} />
+                <Line
+                  type="monotone"
+                  dataKey="value1"
+                  stroke="#E5E7EB"
+                  strokeWidth={2}
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="value2"
+                  stroke="#4F46E5"
+                  strokeWidth={2}
+                  dot={false}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -127,7 +151,13 @@ const EmployeeDashboard = () => {
             <div className="w-full h-24 mt-4">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData}>
-                  <Line type="monotone" dataKey="value1" stroke="#ffffff" strokeWidth={2} dot={false} />
+                  <Line
+                    type="monotone"
+                    dataKey="value1"
+                    stroke="#ffffff"
+                    strokeWidth={2}
+                    dot={false}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -180,4 +210,3 @@ const EmployeeDashboard = () => {
 };
 
 export default EmployeeDashboard;
-

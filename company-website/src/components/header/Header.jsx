@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaBell } from "react-icons/fa";
 import Profile from "../utils/Profile";
 import Notifications from "../utils/Notifications";
@@ -37,7 +37,7 @@ const Header = () => {
         {/* Notification Icon */}
         <Link to="/admin/notification">
           <button className="relative cursor-pointer">
-            <FaBell className="hover:text-gray-300 transition-colors duration-300 h-6 " />
+            <FaBell className="hover:text-gray-300 transition-colors duration-300 h-6 text-xl" />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
               3
             </span>

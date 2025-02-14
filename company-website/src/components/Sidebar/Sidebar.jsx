@@ -1,61 +1,61 @@
 import { useState } from "react";
-import {
-  FaBars,
-  FaTimes,
-  // FaChevronRight,
-  // FaChevronDown,
-  // FaUser,
-  // FaMoneyBillAlt,
-  // FaBell,
-  // FaListAlt,
-  FaSignOutAlt,
-  FaTasks,
-} from "react-icons/fa";
-import { CgPerformance } from "react-icons/cg";
-import { TbLayoutDashboardFilled } from "react-icons/tb";
+import { FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
+import { adminSidebarItems } from "./SidebarItems";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const EmployeeSideBar = () => {
+const SideBar = ({ menuItems }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isServicesOpen, setIsServicesOpen] = useState(false); // Manage dropdown state
 
   return (
     <>
       {/* Sidebar for larger screens */}
-      <nav className="bg-gray-900 text-white  flex-shrink-0 bottom-0 z-50 flex flex-col relative h-dvh">
+      <nav className="bg-gray-900 text-white  flex-shrink-0 bottom-0 z-50 flex flex-col relative h-full">
         {/* Sidebar Header */}
 
         {/* Sidebar Menu Items */}
         <div className="p-2 flex flex-col space-y-2 overflow-y-auto">
-          <Link
-            to="/employee"
-            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
-          >
-            <span className="text-xl">
-              <TbLayoutDashboardFilled />
-            </span>
-            <span className="font-medium">Dashboard</span>
-          </Link>
-
-          <Link
-            to="/employee/task"
-            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
-          >
-            <span className="text-xl">
-              <FaTasks />
-            </span>
-            <span className="font-medium">Task Management</span>
-          </Link>
-
-          <Link
-            to="/employee/performance"
-            className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
-          >
-            <span className="text-xl">
-              <CgPerformance />
-            </span>
-            <span className="font-medium">Performance Tracking</span>
-          </Link>
+          {menuItems.map((item) => {
+            if (item.name === "Dashboard") {
+              return (
+                <>
+                  <Link
+                    key={item.id}
+                    to={item.link}
+                    className="flex items-center space-x-3 px-4 py-2 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue mb-4 mt-2"
+                  >
+                    <span className="text-lg">
+                      <item.icon />
+                    </span>
+                    <span
+                      className={`${
+                        item.font ? item.font : "text-sm"
+                      } font-medium`}
+                    >
+                      {item.name}
+                    </span>
+                  </Link>
+                  <div className="h-0.5 bg-gray-500 mx-2 mb-4" />
+                </>
+              );
+            }
+            return (
+              <Link
+                key={item.id}
+                to={item.link}
+                className="flex items-center space-x-3 px-4 py-3 w-full transition-colors duration-200 rounded-lg hover:bg-gray-600 hover:text-blue focus:bg-gray-600 "
+              >
+                <span className="text-xl">
+                  <item.icon />
+                </span>
+                <span
+                  className={`${item.font ? item.font : "text-sm"} font-medium`}
+                >
+                  {item.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="p-3 w-full absolute bottom-13 mb-4">
@@ -86,7 +86,7 @@ const EmployeeSideBar = () => {
       >
         <div className="p-4 flex flex-col h-full">
           <div className="flex-grow space-y-2 overflow-y-auto">
-            {/* {menuItems.map((item) => (
+            {adminSidebarItems.map((item) => (
               <Link
                 key={item.id}
                 to={item.link}
@@ -99,7 +99,7 @@ const EmployeeSideBar = () => {
                   {item.name}
                 </span>
               </Link>
-            ))} */}
+            ))}
           </div>
 
           {/* Mobile Logout Button at the Bottom */}
@@ -118,4 +118,8 @@ const EmployeeSideBar = () => {
   );
 };
 
-export default EmployeeSideBar;
+export default SideBar;
+
+SideBar.propTypes = {
+  menuItems: PropTypes.object,
+};
