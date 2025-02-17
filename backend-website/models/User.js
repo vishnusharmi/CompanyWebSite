@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const Roles=require("../models/Role")
 
 const Users = sequelize.define("users", {
   id: {
@@ -27,10 +28,13 @@ const Users = sequelize.define("users", {
     allowNull: true,
     unique: true,
   },
-  role: {
-    type: DataTypes.ENUM("admin", "employee", "company"),
+  roleId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: "employee",
+    references: {
+      model: 'Roles',
+      key: 'id'
+    }
   },
 
   otp: {
@@ -60,5 +64,8 @@ const Users = sequelize.define("users", {
     allowNull: true,
   },
 });
+
+Users.belongsTo(Roles, { foreignKey: 'roleId' });
+Roles.hasMany(Users, { foreignKey: 'roleId' });
 
 module.exports = Users;

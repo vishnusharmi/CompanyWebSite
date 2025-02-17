@@ -132,6 +132,7 @@ const FinancialManagement = () => {
                       type="text"
                       name="name"
                       value={formData.name}
+                      placeholder='Name'
                       onChange={handleChange}
                       className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       required
@@ -159,6 +160,7 @@ const FinancialManagement = () => {
                       type="number"
                       name="salary"
                       value={formData.salary}
+                      placeholder='Amount'
                       onChange={handleChange}
                       className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       required
@@ -217,7 +219,7 @@ const FinancialManagement = () => {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 max-w-screen lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
         <div className="bg-white p-4 md:p-6 rounded-lg shadow">
           <div className="flex items-center justify-between">
             <div>
