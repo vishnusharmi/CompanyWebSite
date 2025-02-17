@@ -6,7 +6,9 @@ import {
   Search,
   CheckCircle,
   XCircle,
+  Eye,
 } from "lucide-react";
+import FormComponent from "./Forms/FormComponent";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([
@@ -51,14 +53,14 @@ const UserManagement = () => {
     if (!isOpen) return null;
 
     return (
-      <div className="absolute inset-0 flex ml-60 items-center  justify-center bg-black/70 z-50">
+      <div className="absolute inset-0 flex items-center  justify-center bg-black/70 z-50">
         <div className="bg-white rounded-lg w-full max-w-xl">
-          <div className="p-6">
+          <div className="p-4 relative">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-xl font-semibold">{title}</h2>
               <button
                 onClick={onClose}
-                className="text-gray-600 hover:text-gray-900 text-3xl"
+                className="text-gray-600 hover:text-gray-900 text-3xl absolute right-5 top-3"
               >
                 ×
               </button>
@@ -334,6 +336,9 @@ const UserManagement = () => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex justify-end gap-3">
+                      <button className="text-gray-400 hover:text-gray-900 focus:outline-none">
+                        <Eye className="h-4 w-4" />
+                      </button>
                       <button
                         onClick={() => {
                           setSelectedUser(user);
@@ -358,12 +363,10 @@ const UserManagement = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={isAddDialogOpen}
-        onClose={() => setIsAddDialogOpen(false)}
-        title="Add New User"
-      >
-        <UserForm onSubmit={handleAddUser} title="Add User" />
+      {/* EMPLOYEE AND COMPANY FORM RENDERING */}
+      <Modal isOpen={isAddDialogOpen} onClose={() => setIsAddDialogOpen(false)}>
+        {/* <UserForm onSubmit={handleAddUser} title="Add User" /> */}
+        <FormComponent />
       </Modal>
 
       <Modal
